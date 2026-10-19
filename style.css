@@ -61,3 +61,13 @@ footer { margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--border
 .share .kicker { margin-right: 4px; }
 [hidden] { display: none !important; }
 @media (max-width: 900px) { .side { display: none; } }
+
+/* Impact gauge on the home page (same as the Thrum app): four colours, flush
+   right on the beat-tab row; dimmed colours are filtered out. */
+.filters { display: flex; align-items: flex-start; gap: 24px; margin: -12px 0 24px; }
+.filters .tabs { flex: 1; min-width: 0; margin: 0; }
+.gauge { flex: none; display: flex; align-items: center; gap: 3px; margin-top: 10px; }
+.gauge button { width: 30px; height: 12px; padding: 0; border: none; cursor: pointer; }
+.gauge button:first-child { border-radius: 6px 0 0 6px; }
+.gauge button:last-child { border-radius: 0 6px 6px 0; }
+.gauge button.dim { opacity: 0.22; }

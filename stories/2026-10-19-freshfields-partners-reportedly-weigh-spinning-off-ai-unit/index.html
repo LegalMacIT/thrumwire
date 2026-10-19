@@ -35,25 +35,28 @@
       </div>
       <nav><a href="/about/">About Thrum</a></nav>
     </header>
-      <nav class="tabs" aria-label="Filter by beat">
-        <a class="tab" data-beat="all" href="/">All</a>
-        <a class="tab" data-beat="lawfirms" href="/#beat=lawfirms">Law Firms &amp; AI</a>
-        <a class="tab" data-beat="scientists" href="/#beat=scientists">AI Warnings</a>
-        <a class="tab" data-beat="aiforgood" href="/#beat=aiforgood">AI for Good</a>
-      </nav>
+      <div class="filters">
+        <nav class="tabs" aria-label="Filter by beat">
+          <a class="tab" data-beat="all" href="/">All</a>
+          <a class="tab" data-beat="lawfirms" href="/#beat=lawfirms">Law Firms &amp; AI</a>
+          <a class="tab" data-beat="scientists" href="/#beat=scientists">AI Warnings</a>
+          <a class="tab" data-beat="aiforgood" href="/#beat=aiforgood">AI for Good</a>
+        </nav>
+
+      </div>
     <div class="cols">
       <aside class="side">
         <section class="group">
           <h2 class="kicker">★ Editor's picks</h2>
-          <a class="side-link here" data-beat="lawfirms" href="/stories/2026-10-19-freshfields-partners-reportedly-weigh-spinning-off-ai-unit/"><span class="star">★</span><span>Freshfields partners reportedly weigh spinning off AI unit Freshfields Lab as a separate, investable company</span></a>
+          <a class="side-link here" data-beat="lawfirms" data-impact="Medium" href="/stories/2026-10-19-freshfields-partners-reportedly-weigh-spinning-off-ai-unit/"><span class="star">★</span><span>Freshfields partners reportedly weigh spinning off AI unit Freshfields Lab as a separate, investable company</span></a>
         </section>
         <section class="group">
           <h2 class="kicker">Mon, Oct 19</h2>
-          <a class="side-link" data-beat="scientists" href="/stories/2026-10-17-anthropic-publishes-a-log-of-unintended-ai-behaviours/"><span class="dot" style="background:#d35a0f"></span><span>Anthropic publishes a log of unintended AI behaviours and pulls live internet access from internal evaluations</span></a>
-          <a class="side-link" data-beat="aiforgood" href="/stories/2026-10-18-harvard-publishes-first-large-scale-study-of-how/"><span class="dot" style="background:#b98a00"></span><span>Harvard publishes first large-scale study of how doctors use AI in clinical practice</span></a>
-          <a class="side-link" data-beat="lawfirms" href="/stories/2026-10-18-ex-a-o-senior-partner-launches-ai-native/"><span class="dot" style="background:#b98a00"></span><span>Ex-A&amp;O senior partner launches AI-native law firm for European SMEs with flat-fee contract review</span></a>
-          <a class="side-link" data-beat="lawfirms" href="/stories/2026-10-19-federal-judge-enters-default-judgment-and-orders/"><span class="dot" style="background:#d35a0f"></span><span>Federal judge enters default judgment and orders $38,877 in fees after attorney's repeated AI-fabricated citations</span></a>
-          <a class="side-link" data-beat="lawfirms" href="/stories/2026-10-19-hogan-lovells-cadwalader-launches-firmwide-ai-strategy/"><span class="dot" style="background:#d35a0f"></span><span>Hogan Lovells Cadwalader launches firmwide AI strategy and signs with both Harvey and Legora</span></a>
+          <a class="side-link" data-beat="scientists" data-impact="High" href="/stories/2026-10-17-anthropic-publishes-a-log-of-unintended-ai-behaviours/"><span class="dot" style="background:#d35a0f"></span><span>Anthropic publishes a log of unintended AI behaviours and pulls live internet access from internal evaluations</span></a>
+          <a class="side-link" data-beat="aiforgood" data-impact="Medium" href="/stories/2026-10-18-harvard-publishes-first-large-scale-study-of-how/"><span class="dot" style="background:#b98a00"></span><span>Harvard publishes first large-scale study of how doctors use AI in clinical practice</span></a>
+          <a class="side-link" data-beat="lawfirms" data-impact="Medium" href="/stories/2026-10-18-ex-a-o-senior-partner-launches-ai-native/"><span class="dot" style="background:#b98a00"></span><span>Ex-A&amp;O senior partner launches AI-native law firm for European SMEs with flat-fee contract review</span></a>
+          <a class="side-link" data-beat="lawfirms" data-impact="High" href="/stories/2026-10-19-federal-judge-enters-default-judgment-and-orders/"><span class="dot" style="background:#d35a0f"></span><span>Federal judge enters default judgment and orders $38,877 in fees after attorney's repeated AI-fabricated citations</span></a>
+          <a class="side-link" data-beat="lawfirms" data-impact="High" href="/stories/2026-10-19-hogan-lovells-cadwalader-launches-firmwide-ai-strategy/"><span class="dot" style="background:#d35a0f"></span><span>Hogan Lovells Cadwalader launches firmwide AI strategy and signs with both Harvey and Legora</span></a>
         </section>
       </aside>
       <main>
@@ -83,25 +86,45 @@
   </div>
 <script>
 (function () {
-  function choose(beat) {
-    document.querySelectorAll(".tab").forEach(function (t) { t.classList.toggle("on", t.dataset.beat === beat); });
+  var state = {
+    beat: (location.hash.match(/beat=([\w-]+)/) || [])[1] || "all",
+    impact: (location.hash.match(/impact=(\w+)/) || [])[1] || "all"
+  };
+  function levels(impact) { return impact === "High" ? ["High", "Critical"] : [impact]; }
+  function apply() {
+    document.querySelectorAll(".tab").forEach(function (t) { t.classList.toggle("on", t.dataset.beat === state.beat); });
+    document.querySelectorAll(".gauge button").forEach(function (b) {
+      var lit = state.impact === "all" || levels(state.impact).indexOf(b.dataset.level) >= 0;
+      b.classList.toggle("dim", !lit);
+      b.setAttribute("aria-pressed", b.dataset.level === state.impact);
+    });
     document.querySelectorAll("[data-beat]:not(.tab)").forEach(function (el) {
-      el.hidden = beat !== "all" && el.dataset.beat !== beat;
+      el.hidden = (state.beat !== "all" && el.dataset.beat !== state.beat) ||
+        (state.impact !== "all" && levels(state.impact).indexOf(el.dataset.impact) < 0);
     });
     document.querySelectorAll(".group").forEach(function (g) {
       g.hidden = !g.querySelector("[data-beat]:not([hidden])");
     });
+    var parts = [];
+    if (state.beat !== "all") parts.push("beat=" + state.beat);
+    if (state.impact !== "all") parts.push("impact=" + state.impact);
+    history.replaceState(null, "", parts.length ? "#" + parts.join("&") : "/");
   }
-  var start = (location.hash.match(/beat=([\w-]+)/) || [])[1] || "all";
   if (document.body.dataset.home) {
     document.querySelectorAll(".tab").forEach(function (t) {
       t.addEventListener("click", function (e) {
         e.preventDefault();
-        history.replaceState(null, "", t.dataset.beat === "all" ? "/" : "#beat=" + t.dataset.beat);
-        choose(t.dataset.beat);
+        state.beat = t.dataset.beat;
+        apply();
       });
     });
-    choose(start);
+    document.querySelectorAll(".gauge button").forEach(function (b) {
+      b.addEventListener("click", function () {
+        state.impact = state.impact === b.dataset.level ? "all" : b.dataset.level;
+        apply();
+      });
+    });
+    apply();
   }
   document.querySelectorAll("[data-copy]").forEach(function (b) {
     b.addEventListener("click", function () {
