@@ -3,38 +3,90 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Thrum</title>
+  <title>Thrum — the hum behind AI in law</title>
   <meta name="description" content="Thrum listens for the hum behind AI in law, and in iManage, before it becomes a headline.">
+  
+  <meta property="og:site_name" content="Thrum">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Thrum — the hum behind AI in law">
+  <meta property="og:description" content="Thrum listens for the hum behind AI in law, and in iManage, before it becomes a headline.">
+  <meta property="og:url" content="https://thrumwire.com/">
+  <meta property="og:image" content="https://thrumwire.com/card.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="author" content="Hector Cruz, LegalMac IT">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="stylesheet" href="/style.css">
 </head>
-<body>
-  <!-- Holding page until the public Thrum site is built here. -->
-  <div class="wrap">
+<body data-home="1">
+  <!-- Built by Thrum (server/site.js). Edit the generator, not this file. -->
+  <div class="wrap wide">
     <header>
       <div>
         <div class="kicker">Intelligence Briefing</div>
-        <svg class="logo" viewBox="0 0 120 32" role="img" aria-label="Thrum">
-          <rect x="2" y="13" width="2.6" height="6" rx="1.3" fill="#9fb0c6"/>
-          <rect x="6.6" y="10" width="2.6" height="12" rx="1.3" fill="#6f86a5"/>
-          <rect x="11.2" y="6.5" width="2.6" height="19" rx="1.3" fill="#46628a"/>
-          <rect x="15.8" y="2" width="2.6" height="28" rx="1.3" fill="#9a7a3c"/>
-          <rect x="20.4" y="6.5" width="2.6" height="19" rx="1.3" fill="#46628a"/>
-          <rect x="25" y="10" width="2.6" height="12" rx="1.3" fill="#6f86a5"/>
-          <rect x="29.6" y="13" width="2.6" height="6" rx="1.3" fill="#9fb0c6"/>
-          <text x="40" y="23" font-family="Georgia, serif" font-size="21" fill="#1f3a5f">thrum</text>
-        </svg>
+        <a href="/" aria-label="Thrum home"><svg class="logo" viewBox="0 0 120 32" role="img" aria-label="Thrum">
+  <rect x="2" y="13" width="2.6" height="6" rx="1.3" fill="#9fb0c6"/><rect x="6.6" y="10" width="2.6" height="12" rx="1.3" fill="#6f86a5"/>
+  <rect x="11.2" y="6.5" width="2.6" height="19" rx="1.3" fill="#46628a"/><rect x="15.8" y="2" width="2.6" height="28" rx="1.3" fill="#9a7a3c"/>
+  <rect x="20.4" y="6.5" width="2.6" height="19" rx="1.3" fill="#46628a"/><rect x="25" y="10" width="2.6" height="12" rx="1.3" fill="#6f86a5"/>
+  <rect x="29.6" y="13" width="2.6" height="6" rx="1.3" fill="#9fb0c6"/>
+  <text x="40" y="23" font-family="Georgia, serif" font-size="21" fill="#1f3a5f">thrum</text></svg></a>
       </div>
       <nav><a href="/about/">About Thrum</a></nav>
     </header>
 
-    <main>
+    <div class="cols">
+      <aside class="side">
+        <section class="group">
+          <h2 class="kicker">Mon, Oct 19</h2>
+          <a class="side-link" data-beat="lawfirms" href="/stories/2026-10-19-hogan-lovells-cadwalader-launches-firmwide-ai-strategy/"><span class="dot" style="background:#d35a0f"></span><span>Hogan Lovells Cadwalader launches firmwide AI strategy and signs with both Harvey and Legora</span></a>
+        </section>
+      </aside>
+      <main>
       <h1>The hum behind AI in law</h1>
       <p class="lede">Thrum listens for the hum behind AI in law — and in iManage — before it becomes a headline.</p>
-      <p>Briefings are on their way. Until then, read <a href="/about/">what Thrum is and how it works</a>.</p>
-    </main>
-
+      <section class="group day">
+        <h2 class="kicker">Mon, Oct 19</h2>
+        <a class="row" data-beat="lawfirms" href="/stories/2026-10-19-hogan-lovells-cadwalader-launches-firmwide-ai-strategy/">
+          <span class="dot" style="background:#d35a0f"></span>
+          <span><span class="kicker">Law Firms &amp; AI</span><strong>Hogan Lovells Cadwalader launches firmwide AI strategy and signs with both Harvey and Legora</strong><span class="why">Large firms rarely announce agreements with both leading legal-AI platforms at once, and the firm is also keeping its own proprietary tools.</span></span>
+        </a>
+      </section>
+      </main>
+    </div>
     <footer>© 2026 LegalMac IT LLC · <a href="mailto:hello@thrumwire.com">hello@thrumwire.com</a></footer>
   </div>
+<script>
+(function () {
+  function choose(beat) {
+    document.querySelectorAll(".tab").forEach(function (t) { t.classList.toggle("on", t.dataset.beat === beat); });
+    document.querySelectorAll("[data-beat]:not(.tab)").forEach(function (el) {
+      el.hidden = beat !== "all" && el.dataset.beat !== beat;
+    });
+    document.querySelectorAll(".group").forEach(function (g) {
+      g.hidden = !g.querySelector("[data-beat]:not([hidden])");
+    });
+  }
+  var start = (location.hash.match(/beat=([\w-]+)/) || [])[1] || "all";
+  if (document.body.dataset.home) {
+    document.querySelectorAll(".tab").forEach(function (t) {
+      t.addEventListener("click", function (e) {
+        e.preventDefault();
+        history.replaceState(null, "", t.dataset.beat === "all" ? "/" : "#beat=" + t.dataset.beat);
+        choose(t.dataset.beat);
+      });
+    });
+    choose(start);
+  }
+  document.querySelectorAll("[data-copy]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      navigator.clipboard.writeText(b.dataset.copy).then(function () {
+        b.textContent = "Link copied";
+        setTimeout(function () { b.textContent = "Copy link"; }, 1500);
+      });
+    });
+  });
+})();
+</script>
 </body>
 </html>
