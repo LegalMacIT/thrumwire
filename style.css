@@ -86,3 +86,10 @@ footer { margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--border
 .humming .logo rect:nth-of-type(3n+2) { animation-duration: 0.085s; animation-delay: 0.01s; }
 .humming .logo rect:nth-of-type(3n) { animation-duration: 0.1s; animation-delay: 0.02s; }
 @media (prefers-reduced-motion: reduce) { .humming .logo, .humming .logo rect { animation: none; } }
+
+/* Header links and the "How Thrum researches" page. */
+nav.links { display: flex; gap: 22px; flex-wrap: wrap; }
+.beat-how { border-top: 1px solid var(--border); padding-top: 4px; }
+.beat-how h3 { color: var(--navy); font-size: 20px; margin: 18px 0 6px; }
+.beat-how p { margin: 0 0 8px; }
+.beat-meta { font-family: var(--mono); font-size: 12px; color: var(--muted); letter-spacing: 0.02em; }
