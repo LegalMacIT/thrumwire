@@ -26,7 +26,7 @@
     <header>
       <div>
         <div class="kicker">Intelligence Briefing</div>
-        <a href="/" aria-label="Thrum home"><svg class="logo" viewBox="0 0 120 32" role="img" aria-label="Thrum">
+        <a href="/" class="logo-link" aria-label="Thrum home"><svg class="logo" viewBox="0 0 120 32" role="img" aria-label="Thrum">
   <rect x="2" y="13" width="2.6" height="6" rx="1.3" fill="#9fb0c6"/><rect x="6.6" y="10" width="2.6" height="12" rx="1.3" fill="#6f86a5"/>
   <rect x="11.2" y="6.5" width="2.6" height="19" rx="1.3" fill="#46628a"/><rect x="15.8" y="2" width="2.6" height="28" rx="1.3" fill="#9a7a3c"/>
   <rect x="20.4" y="6.5" width="2.6" height="19" rx="1.3" fill="#46628a"/><rect x="25" y="10" width="2.6" height="12" rx="1.3" fill="#6f86a5"/>
@@ -127,6 +127,19 @@
       });
     });
     apply();
+  }
+  // The logo hums, silently (Hector, 2026-10-19): on the home page, clicking
+  // the logo makes it tremble and the bars shimmer for two seconds. The sound
+  // stays in the Thrum app only (readers are often at work). Elsewhere the
+  // logo is just the home link.
+  var logo = document.querySelector(".logo-link");
+  if (logo && document.body.dataset.home) {
+    logo.addEventListener("click", function (e) {
+      e.preventDefault();
+      if (logo.classList.contains("humming")) return;
+      logo.classList.add("humming");
+      setTimeout(function () { logo.classList.remove("humming"); }, 2000);
+    });
   }
   document.querySelectorAll("[data-copy]").forEach(function (b) {
     b.addEventListener("click", function () {

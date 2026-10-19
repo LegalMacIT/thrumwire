@@ -71,3 +71,18 @@ footer { margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--border
 .gauge button:first-child { border-radius: 6px 0 0 6px; }
 .gauge button:last-child { border-radius: 0 6px 6px 0; }
 .gauge button.dim { opacity: 0.22; }
+
+/* The humming logo (home page, silent): the logo trembles and each bar shimmers like a
+   vibrating string while the hum plays (class "humming" for 2 seconds). */
+@keyframes thrum-buzz {
+  0%, 100% { transform: translate(0, 0) } 20% { transform: translate(-0.06px, 0.04px) }
+  40% { transform: translate(0.06px, -0.04px) } 60% { transform: translate(-0.04px, -0.05px) }
+  80% { transform: translate(0.05px, 0.05px) }
+}
+@keyframes thrum-flutter { from { transform: scaleY(1.015) } to { transform: scaleY(0.96) } }
+.logo rect { transform-box: fill-box; transform-origin: center; }
+.humming .logo { animation: thrum-buzz 0.09s linear infinite; }
+.humming .logo rect { animation: thrum-flutter 0.07s ease-in-out infinite alternate; }
+.humming .logo rect:nth-of-type(3n+2) { animation-duration: 0.085s; animation-delay: 0.01s; }
+.humming .logo rect:nth-of-type(3n) { animation-duration: 0.1s; animation-delay: 0.02s; }
+@media (prefers-reduced-motion: reduce) { .humming .logo, .humming .logo rect { animation: none; } }
