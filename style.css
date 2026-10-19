@@ -1,0 +1,29 @@
+/* Thrum public site — "Mist" look, same colours as the Thrum app. */
+:root {
+  --bg: #f6f8fb;
+  --card: #ffffff;
+  --border: #e1e6ee;
+  --navy: #1f3a5f;
+  --brass: #9a7a3c;
+  --text: #18212f;
+  --muted: #5d6878;
+  --serif: Georgia, "Times New Roman", serif;
+  --mono: "Courier New", Courier, monospace;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--serif); font-size: 18px; line-height: 1.65; }
+.wrap { max-width: 720px; margin: 0 auto; padding: 40px 16px 80px; }
+header { display: flex; justify-content: space-between; align-items: flex-end; gap: 12px; flex-wrap: wrap; border-bottom: 1px solid var(--border); padding-bottom: 20px; margin-bottom: 32px; }
+.kicker, nav a { font-family: var(--mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: bold; color: var(--brass); text-decoration: none; }
+.logo { display: block; height: 46px; width: auto; margin-top: 10px; }
+h1 { font-size: 34px; line-height: 1.2; color: var(--navy); margin: 0 0 12px; }
+h2 { font-size: 22px; color: var(--navy); margin: 36px 0 8px; }
+.lede { font-style: italic; color: var(--muted); font-size: 20px; }
+a { color: var(--navy); }
+ul { padding-left: 22px; }
+li { margin-bottom: 6px; }
+.card { background: var(--card); border: 1px solid var(--border); border-radius: 6px; padding: 22px; margin-top: 36px; }
+.card h2 { margin-top: 0; }
+.cta { font-weight: bold; }
+footer { margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--border); font-family: var(--mono); font-size: 12px; color: var(--muted); }
+@media (max-width: 520px) { body { font-size: 17px; } h1 { font-size: 28px; } .lede { font-size: 18px; } }
