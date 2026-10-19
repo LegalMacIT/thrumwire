@@ -48,7 +48,7 @@
       </div>
     <div class="cols">
       <aside class="side">
-        <section class="group">
+        <section class="group picks">
           <h2 class="kicker">★ Editor's picks</h2>
           <a class="side-link" data-beat="agents" data-impact="High" href="/stories/2026-10-19-openai-adds-four-more-rogue-agent-incidents-bringing/"><span class="star">★</span><span>OpenAI adds four more rogue-agent incidents, bringing its disclosure page to 19, including an agent that spent from a crypto wallet it found</span></a>
           <a class="side-link" data-beat="corporate" data-impact="High" href="/stories/2026-10-19-kroger-memo-about-3-000-corporate-jobs/"><span class="star">★</span><span>Kroger memo: about 3,000 corporate jobs to go over three years as the grocer leans into AI</span></a>
@@ -58,9 +58,9 @@
         <section class="group">
           <h2 class="kicker">Mon, Oct 19</h2>
           <a class="side-link here" data-beat="scientists" data-impact="High" href="/stories/2026-10-17-anthropic-publishes-a-log-of-unintended-ai-behaviours/"><span class="dot" style="background:#d35a0f"></span><span>Anthropic publishes a log of unintended AI behaviours and pulls live internet access from internal evaluations</span></a>
+          <a class="side-link" data-beat="lawfirms" data-impact="High" href="/stories/2026-10-19-federal-judge-enters-default-judgment-and-orders/"><span class="dot" style="background:#d35a0f"></span><span>Federal judge enters default judgment and orders $38,877 in fees after attorney's repeated AI-fabricated citations</span></a>
           <a class="side-link" data-beat="aiforgood" data-impact="Medium" href="/stories/2026-10-18-harvard-publishes-first-large-scale-study-of-how/"><span class="dot" style="background:#b98a00"></span><span>Harvard publishes first large-scale study of how doctors use AI in clinical practice</span></a>
           <a class="side-link" data-beat="lawfirms" data-impact="Medium" href="/stories/2026-10-18-ex-a-o-senior-partner-launches-ai-native/"><span class="dot" style="background:#b98a00"></span><span>Ex-A&amp;O senior partner launches AI-native law firm for European SMEs with flat-fee contract review</span></a>
-          <a class="side-link" data-beat="lawfirms" data-impact="High" href="/stories/2026-10-19-federal-judge-enters-default-judgment-and-orders/"><span class="dot" style="background:#d35a0f"></span><span>Federal judge enters default judgment and orders $38,877 in fees after attorney's repeated AI-fabricated citations</span></a>
         </section>
       </aside>
       <main>
@@ -92,18 +92,17 @@
     beat: (location.hash.match(/beat=([\w-]+)/) || [])[1] || "all",
     impact: (location.hash.match(/impact=(\w+)/) || [])[1] || "all"
   };
-  function levels(impact) { return impact === "High" ? ["High", "Critical"] : [impact]; }
+  function keep(el) {
+    return (state.beat === "all" || el.dataset.beat === state.beat) &&
+      (state.impact === "all" || el.dataset.impact === state.impact);
+  }
   function apply() {
     document.querySelectorAll(".tab").forEach(function (t) { t.classList.toggle("on", t.dataset.beat === state.beat); });
     document.querySelectorAll(".gauge button").forEach(function (b) {
-      var lit = state.impact === "all" || levels(state.impact).indexOf(b.dataset.level) >= 0;
-      b.classList.toggle("dim", !lit);
+      b.classList.toggle("dim", state.impact !== "all" && b.dataset.level !== state.impact);
       b.setAttribute("aria-pressed", b.dataset.level === state.impact);
     });
-    document.querySelectorAll("[data-beat]:not(.tab)").forEach(function (el) {
-      el.hidden = (state.beat !== "all" && el.dataset.beat !== state.beat) ||
-        (state.impact !== "all" && levels(state.impact).indexOf(el.dataset.impact) < 0);
-    });
+    document.querySelectorAll("[data-beat]:not(.tab)").forEach(function (el) { el.hidden = !keep(el); });
     document.querySelectorAll(".group").forEach(function (g) {
       g.hidden = !g.querySelector("[data-beat]:not([hidden])");
     });
