@@ -97,3 +97,7 @@ nav.links { display: flex; gap: 22px; flex-wrap: wrap; }
 /* "Published by" line at the foot of each story page (links to LegalMac IT). */
 .publisher { margin-top: 26px; padding-top: 14px; border-top: 1px solid var(--border); font-size: 15px; color: var(--muted); }
 .publisher a { color: var(--navy); font-weight: bold; }
+
+/* Share row: links and the Copy link button the same height (Hector,
+   2026-10-19 — the <button> rendered shorter than the <a> links). */
+.share .share-btn { display: inline-flex; align-items: center; box-sizing: border-box; height: 32px; line-height: 1; margin: 0; }
