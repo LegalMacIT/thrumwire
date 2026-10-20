@@ -40,6 +40,8 @@ footer { margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--border
 .meta-row { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 10px; }
 .badge { font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: bold; background: #fff; border: 1.5px solid; border-radius: 3px; padding: 2px 8px; }
 .story h1 { font-size: 30px; }
+/* Hector's highlights in the analysis (2026-10-20): light brass, like a marker pen. */
+mark { background: #f1e6cc; color: inherit; border-radius: 2px; }
 .note { font-size: 14px; font-style: italic; color: var(--muted); border-left: 3px solid var(--brass); padding-left: 12px; }
 .source { font-family: var(--mono); font-size: 13px; color: var(--muted); margin-top: 28px; padding-top: 12px; border-top: 1px solid var(--border); }
 
@@ -66,7 +68,9 @@ footer { margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--border
    right on the beat-tab row; dimmed colours are filtered out. */
 .filters { display: flex; align-items: flex-start; gap: 24px; margin: -12px 0 24px; }
 .filters .tabs { flex: 1; min-width: 0; margin: 0; }
-.gauge { flex: none; display: flex; align-items: center; gap: 3px; margin-top: 10px; }
+.gauge-box { flex: none; display: flex; flex-direction: column; align-items: center; gap: 5px; margin-top: 2px; }
+.gauge-label { font-size: 10px; letter-spacing: 0.08em; white-space: nowrap; }
+.gauge { display: flex; align-items: center; gap: 3px; }
 .gauge button { width: 30px; height: 12px; padding: 0; border: none; cursor: pointer; }
 .gauge button:first-child { border-radius: 6px 0 0 6px; }
 .gauge button:last-child { border-radius: 0 6px 6px 0; }
