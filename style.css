@@ -93,3 +93,7 @@ nav.links { display: flex; gap: 22px; flex-wrap: wrap; }
 .beat-how h3 { color: var(--navy); font-size: 20px; margin: 18px 0 6px; }
 .beat-how p { margin: 0 0 8px; }
 .beat-meta { font-family: var(--mono); font-size: 12px; color: var(--muted); letter-spacing: 0.02em; }
+
+/* "Published by" line at the foot of each story page (links to LegalMac IT). */
+.publisher { margin-top: 26px; padding-top: 14px; border-top: 1px solid var(--border); font-size: 15px; color: var(--muted); }
+.publisher a { color: var(--navy); font-weight: bold; }
