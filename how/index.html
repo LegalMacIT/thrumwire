@@ -18,6 +18,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="stylesheet" href="/style.css">
+  <link rel="alternate" type="application/rss+xml" title="Thrum" href="/feed.xml">
 </head>
 <body>
   <!-- Built by Thrum (server/site.js). Edit the generator, not this file. -->
@@ -32,7 +33,7 @@
   <rect x="29.6" y="13" width="2.6" height="6" rx="1.3" fill="#9fb0c6"/>
   <text x="40" y="23" font-family="Georgia, serif" font-size="21" fill="#1f3a5f">thrum</text></svg></a>
       </div>
-      <nav class="links"><a href="/how/">How Thrum researches</a><a href="/about/">About Thrum</a></nav>
+      <nav class="links"><a href="/about/">About Thrum</a><a class="subscribe" href="/?subscribe" data-signup>Subscribe</a></nav>
     </header>
 
     <div class="cols">
@@ -116,8 +117,93 @@
       <p>Suggestions for a beat — a source we should watch, or a topic we're missing — are welcome at <a href="mailto:hello@thrumwire.com">hello@thrumwire.com</a>.</p>
       </main>
     </div>
-    <footer>© 2026 LegalMac IT LLC · <a href="mailto:hello@thrumwire.com">hello@thrumwire.com</a></footer>
+    <footer>© 2026 LegalMac IT LLC · <a href="mailto:hello@thrumwire.com">hello@thrumwire.com</a> · <a href="/?subscribe" data-signup>Subscribe</a></footer>
   </div>
+  <div class="signup" id="signup" role="dialog" aria-modal="true" aria-labelledby="signup-title" hidden>
+    <div class="signup-box">
+      <button type="button" class="signup-x" data-close aria-label="Close">×</button>
+      <svg class="signup-bars" viewBox="0 0 34 32" aria-hidden="true">
+        <rect x="2" y="13" width="2.6" height="6" rx="1.3" fill="#9fb0c6"/><rect x="6.6" y="10" width="2.6" height="12" rx="1.3" fill="#6f86a5"/>
+        <rect x="11.2" y="6.5" width="2.6" height="19" rx="1.3" fill="#46628a"/><rect x="15.8" y="2" width="2.6" height="28" rx="1.3" fill="#9a7a3c"/>
+        <rect x="20.4" y="6.5" width="2.6" height="19" rx="1.3" fill="#46628a"/><rect x="25" y="10" width="2.6" height="12" rx="1.3" fill="#6f86a5"/>
+        <rect x="29.6" y="13" width="2.6" height="6" rx="1.3" fill="#9fb0c6"/></svg>
+      <h2 id="signup-title">Hear the hum behind AI in law</h2>
+      <p class="signup-sub">Join Thrum for free to get new briefings on AI in law and on iManage — sent right to your inbox.</p>
+      <form class="signup-form" action="https://buttondown.com/api/emails/embed-subscribe/thrum" method="post" target="_blank">
+        <div class="signup-step1">
+          <label class="kicker" for="signup-email">Your email</label>
+          <input type="email" id="signup-email" name="email" required autocomplete="email" placeholder="Enter your email address">
+          <button type="submit" class="signup-go">Subscribe</button>
+        </div>
+        <div class="signup-step2" hidden>
+          <p class="signup-ask">One more thing (optional): who's reading?</p>
+          <label class="kicker" for="signup-name">Full name</label>
+          <input type="text" id="signup-name" name="metadata__full_name" autocomplete="name" placeholder="Your full name">
+          <label class="kicker" for="signup-firm">Firm or company</label>
+          <input type="text" id="signup-firm" name="metadata__company" autocomplete="organization" placeholder="Your firm or company">
+          <button type="submit" class="signup-go">Finish</button>
+          <button type="button" class="signup-skip">Skip</button>
+        </div>
+        <input type="hidden" name="embed" value="1">
+      </form>
+      <p class="signup-done" hidden>Almost there — check your inbox and click the link to confirm.</p>
+      <button type="button" class="signup-later" data-close>Not now</button>
+      <p class="signup-fine">Free. Unsubscribe anytime. Emails are sent by Buttondown; your details are used only for Thrum.</p>
+    </div>
+  </div>
+<script>
+(function () {
+  var box = document.getElementById("signup");
+  if (!box) return;
+  var before = null;
+  function open(e) {
+    if (e) e.preventDefault();
+    before = document.activeElement;
+    box.hidden = false;
+    document.getElementById("signup-email").focus();
+  }
+  function close() {
+    box.hidden = true;
+    if (before && before.focus) before.focus();
+  }
+  box.querySelectorAll("[data-close]").forEach(function (b) { b.addEventListener("click", close); });
+  box.addEventListener("click", function (e) { if (e.target === box) close(); });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !box.hidden) close(); });
+  document.querySelectorAll("[data-signup]").forEach(function (b) { b.addEventListener("click", open); });
+  // Two steps (Hector, 2026-11-09): the email first, then the reader's full
+  // name and firm (optional, "Skip"). Everything goes to Buttondown in one
+  // request at the end, saved as the subscriber's details (metadata).
+  var form = box.querySelector("form"), step2 = box.querySelector(".signup-step2");
+  function send() {
+    fetch(form.action, { method: "POST", body: new FormData(form), mode: "no-cors" })
+      .then(function () {
+        form.hidden = true;
+        box.querySelector(".signup-done").hidden = false;
+        box.querySelector(".signup-later").textContent = "Close";
+        box.querySelector(".signup-later").hidden = false;
+      })
+      .catch(function () { form.submit(); });
+  }
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    if (step2.hidden) {
+      box.querySelector(".signup-step1").hidden = true;
+      step2.hidden = false;
+      box.querySelector(".signup-later").hidden = true; // "Skip" covers it here
+      document.getElementById("signup-name").focus();
+    } else send();
+  });
+  box.querySelector(".signup-skip").addEventListener("click", function () {
+    document.getElementById("signup-name").value = "";
+    document.getElementById("signup-firm").value = "";
+    send();
+  });
+  if (/[?&]subscribe/.test(location.search)) {
+    history.replaceState(null, "", location.pathname + location.hash);
+    open();
+  }
+})();
+</script>
 <script>
 (function () {
   var state = {

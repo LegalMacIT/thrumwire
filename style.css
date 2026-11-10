@@ -105,3 +105,26 @@ nav.links { display: flex; gap: 22px; flex-wrap: wrap; }
 /* Share row: links and the Copy link button the same height (Hector,
    2026-10-19 — the <button> rendered shorter than the <a> links). */
 .share .share-btn { display: inline-flex; align-items: center; box-sizing: border-box; height: 32px; line-height: 1; margin: 0; }
+
+/* Email sign-up pop-up (2026-11-09), modelled on Medium's. */
+.signup { position: fixed; inset: 0; z-index: 50; display: flex; align-items: center; justify-content: center; padding: 16px; background: rgba(24, 33, 47, 0.22); }
+.signup-box { position: relative; width: 100%; max-width: 480px; max-height: calc(100vh - 32px); overflow-y: auto; background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 36px 32px 24px; text-align: center; box-shadow: 0 12px 40px rgba(24, 33, 47, 0.14); }
+.signup-x { position: absolute; top: 8px; right: 10px; width: 36px; height: 36px; font-size: 26px; line-height: 1; color: var(--muted); background: none; border: none; cursor: pointer; }
+.signup-bars { width: 54px; height: 50px; }
+.signup h2 { font-size: 26px; font-weight: normal; color: #3a5478; line-height: 1.25; margin: 10px 0 12px; }
+.signup-sub { color: var(--muted); font-size: 16px; margin: 0 0 22px; }
+.signup-form { text-align: left; max-width: 340px; margin: 0 auto; }
+.signup-form label { display: block; margin-bottom: 6px; font-weight: normal; }
+.signup-form input[type="email"], .signup-form input[type="text"] { display: block; width: 100%; font: inherit; font-size: 16px; padding: 10px 12px; border: 1px solid #7d8fa8; border-radius: 4px; background: var(--bg); color: var(--text); }
+.signup-form input:focus { outline: 2px solid var(--navy); outline-offset: 1px; }
+.signup-go { display: block; margin: 18px auto 0; font-family: var(--mono); font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: normal; color: #fff; background: var(--navy); border: none; border-radius: 22px; padding: 12px 30px; cursor: pointer; }
+.signup-done { font-size: 17px; color: var(--navy); font-weight: normal; margin: 8px 0 0; }
+.signup-later { display: block; margin: 16px auto 0; font: inherit; font-size: 15px; color: var(--muted); background: none; border: none; text-decoration: underline; cursor: pointer; }
+.signup-fine { font-size: 12px; color: var(--muted); margin: 18px 0 0; line-height: 1.5; }
+@media (max-width: 520px) { .signup-box { padding: 32px 18px 20px; } .signup h2 { font-size: 22px; } }
+.signup-step2 input + label { margin-top: 14px; }
+.signup-ask { text-align: center; color: var(--muted); font-size: 16px; margin: 0 0 14px; }
+.signup-skip { display: block; margin: 10px auto 0; font: inherit; font-size: 15px; color: var(--muted); background: none; border: none; text-decoration: underline; cursor: pointer; }
+nav.links { align-items: center; }
+nav a.subscribe { color: var(--navy); border: 1px solid #7d8fa8; border-radius: 14px; padding: 4px 12px; background: #fff; }
+nav a.subscribe:hover { background: var(--navy); border-color: var(--navy); color: #fff; }
