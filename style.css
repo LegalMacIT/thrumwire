@@ -126,5 +126,3 @@ nav.links { display: flex; gap: 22px; flex-wrap: wrap; }
 .signup-ask { text-align: center; color: var(--muted); font-size: 16px; margin: 0 0 14px; }
 .signup-skip { display: block; margin: 10px auto 0; font: inherit; font-size: 15px; color: var(--muted); background: none; border: none; text-decoration: underline; cursor: pointer; }
 nav.links { align-items: center; }
-nav a.subscribe { color: var(--navy); border: 1px solid #7d8fa8; border-radius: 14px; padding: 4px 12px; background: #fff; }
-nav a.subscribe:hover { background: var(--navy); border-color: var(--navy); color: #fff; }
